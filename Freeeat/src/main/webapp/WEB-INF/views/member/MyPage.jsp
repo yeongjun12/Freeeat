@@ -113,7 +113,7 @@ table td {
 <body>
     <%@ include file= "../common/menubar_hj.jsp" %>
     
-    <%
+    <%	String memId = loginMem.getMemId();
     	String memNickName = loginMem.getMemNickName();
         String phone = loginMem.getPhone();
         String birthDate = loginMem.getBirthDate();
@@ -121,6 +121,8 @@ table td {
         String residence = loginMem.getResidence();
         
     %>
+    
+    
     <br><br><br><br>
 
 
@@ -148,8 +150,8 @@ table td {
                 
                <form action="update.yj" method="post">
                 <table>
-                   
-        
+                    <input type="hidden"  name="memId" value="<%= memId %>">
+        		
                     <tr>
                         <td>닉네임 </td>
                         <td><input type="text"  name="memNickName" value="<%=memNickName %>"  ></td>
@@ -164,7 +166,7 @@ table td {
         
                     <tr>
                         <td>생년월일  </td>
-                        <td><input type="text"  name="birth" value="<%= birthDate %>" ></td>
+                        <td><input type="text"  name="birthDate" value="<%= birthDate %>" ></td>
                 
                     </tr>
         
@@ -173,11 +175,27 @@ table td {
                         <td><input type="text"  name="email" value="<%= email %>" ></td>
                     
                     </tr>
-                    <tr>
-                        <td>거주지 </td>
-                        <td><input  type="text"  name="residence" value="<%= residence %>" ></td>
                     
-                    </tr>
+                    
+                    <tr>
+                    <td>거주지</td>
+                    <td>
+                        <select name="residence" id="residence" >
+                            <option value="서울" selected>서울</option>
+                            <option value="인천">인천</option>
+                            <option value="경기">경기</option>
+                            <option value="강원">강원</option>
+                            <option value="충청">충청</option>
+                            <option value="전라">전라</option>
+                            <option value="경상">경상</option>
+                            <option value="제주">제주</option>
+                        </select>
+
+                    </td>
+                    
+                </tr>
+                    
+                    
                 </table>
                 
                 <button id="btn" type="submit">수정하기</button>
@@ -279,5 +297,22 @@ table td {
         <%@ include file= "../common/footer.jsp" %>
 
     </div>
+    
+    
+    
+    <script>
+		document.addEventListener('DOMContentLoaded', function() {
+		    var residenceValue = "<%=residence %>"; // You can replace this with your dynamic value
+		
+		    var residenceSelect = document.getElementById('residence');
+		    
+		    for (var i = 0; i < residenceSelect.options.length; i++) {
+		        if (residenceSelect.options[i].value === residenceValue) {
+		            residenceSelect.options[i].selected = true;
+		            break;
+		        }
+		    }
+		});
+</script>
 </body>
 </html>

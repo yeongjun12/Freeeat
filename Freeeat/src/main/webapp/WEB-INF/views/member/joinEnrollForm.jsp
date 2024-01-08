@@ -92,8 +92,6 @@
 						<button type="button" onclick="check();">확인</button>
 
 					</td>
-
-
 				</tr>
 
                 <tr>

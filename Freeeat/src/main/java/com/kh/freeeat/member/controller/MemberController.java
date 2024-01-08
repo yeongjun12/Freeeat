@@ -106,7 +106,7 @@ public class MemberController {
 			//session에 일회성 알람문 띄우기
 			 session.setAttribute("alertMsg", "성공적으로 변경되었습니다!!");
 			 
-			 return "redirect:myPage.yj";
+			 return "redirect:mypage.yj";
 			
 		} else { //수정 실패 => 에러문구 담아서 에러페이지로 포워딩
 			

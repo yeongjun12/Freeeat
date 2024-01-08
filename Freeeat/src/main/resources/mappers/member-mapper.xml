@@ -33,7 +33,7 @@
 		       MEM_PWD,
 		       MEM_NICKNAME,
 		       MEM_PHONE,
-		       MEM_BIRTH,
+		       TO_CHAR(MEM_BIRTH,'YYYY-MM-DD') AS MEM_BIRTH, <!-- 시간 안나오게 하려고  -->
 		       MEM_EMAIL,
 		       MEM_TYPE,
 		       MEM_RESIDENCE,
@@ -89,9 +89,9 @@
 		   SET
 		       MEM_NICKNAME = #{memNickName},
 		       MEM_PHONE = #{phone},
-		       MEM_PWD = #{memPwd},
+		       MEM_BIRTH = #{birthDate},
 		       MEM_EMAIL = #{email},
-		       MEM_TYPE = #{type}
+		       MEM_RESIDENCE = #{residence}
 		    
 		 WHERE 
 		       MEM_ID = #{memId} AND MEM_STATUS = 'Y'
