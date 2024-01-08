@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper">
+
+
+<resultMap id="memberResultSet" type="member">
+	
+		<result column="MEM_NO" property="memNo" />
+		<result column="MEM_ID" property="memId" />
+		<result column="MEM_PWD" property="memPwd" />
+		<result column="MEM_NICKNAME" property="memNickName" />
+		<result column="MEM_PHONE" property="phone" />
+		<result column="MEM_BIRTH" property="birthDate" />
+		<result column="MEM_EMAIL" property="email" />
+		<result column="MEM_TYPE" property="type" />
+		<result column="MEM_RESIDENCE" property="residence" />
+		<result column="MEM_ENROLLDATE" property="enrollDate" />
+		<result column="MEM_STATUS" property="status" />
+		<result column="PROFILE_OG" property="mem_profileOG" />
+		<result column="PROFILE_REVISE" property="mem_profileRevise" />
+		<result column="PROFILE_SACEPATH" property="mem_profile_savePath" />
+		
+	</resultMap>
+	
+	<select id="loginMember" parameterType="member" resultMap="memberResultSet">
+		
+		
+		SELECT
+		       MEM_NO,
+		       MEM_ID,
+		       MEM_PWD,
+		       MEM_NICKNAME,
+		       MEM_PHONE,
+		       MEM_BIRTH,
+		       MEM_EMAIL,
+		       MEM_TYPE,
+		       MEM_RESIDENCE,
+		       MEM_ENROLLDATE,
+		       MEM_STATUS,
+		       MEM_PROFILE_OG,
+		       MEM_PROFILE_REVISE,
+		       MEM_PROFILE_SAVEPATH
+		  FROM
+		       MEMBER
+		 WHERE
+		       MEM_ID = #{memId}
+		   AND
+		       MEM_STATUS = 'Y'
+	
+	</select>
+	
+	
+	<insert id="insertMember" parameterType="member">
+		INSERT
+   		 	INTO
+       			MEMBER
+	            (
+	            MEM_NO,
+	            MEM_ID,
+	            MEM_NICKNAME,
+	            MEM_PWD,
+	            MEM_PHONE,
+	            MEM_BIRTH,
+	            MEM_EMAIL,
+	            MEM_TYPE,
+	            MEM_RESIDENCE
+	            )
+    	VALUES
+            (
+	            SEQ_MNO.NEXTVAL,
+	            #{memId},
+	            #{memNickName},
+	            #{memPwd},
+	            #{phone},
+	            #{birthDate},
+	            #{email},
+	            #{type},
+	            #{residence}
+	            )
+		
+	</insert>
+	
+	
+</mapper>
