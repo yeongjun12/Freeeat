@@ -1,5 +1,6 @@
 package com.kh.freeeat.member.model.dao;
 
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +18,10 @@ public class MemberDao {
 	//회원가입
 	public int insertMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.insert("memberMapper.insertMember", m);
+	}
+	
+	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateMember",m);
 	}
 
 	

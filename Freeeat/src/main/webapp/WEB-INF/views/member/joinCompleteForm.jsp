@@ -52,7 +52,7 @@ button:active {
                    <p style="font-size : 27px;"> 회원가입이 완료되었습니다! <br>
                     회원님은 Freeeat에 모든 기능을 사용할 수 있습니다!</p>
                     <br><br>
-                    <button class="btn_1" onclick="location.href='<%= contextPath %>/views/member/loginEnrollForm.jsp'">로그인</button>
+                    <button class="btn_1" onclick="location.href='loginForm.yj'">로그인</button>
                     
                 </td>
                 <br>

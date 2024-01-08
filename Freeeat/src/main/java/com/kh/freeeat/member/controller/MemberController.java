@@ -21,14 +21,13 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
-	
+	//로그인 화면 띄우기
 	@RequestMapping("loginForm.yj")
 	public String loginForm() {
 		return "member/loginEnrollForm";
 	}
 	
-	
-	
+	//로그인 처리
 	@RequestMapping(value="login.yj")
 	public ModelAndView loginMember(Member m, ModelAndView mv, HttpSession session) {
 		
@@ -37,7 +36,7 @@ public class MemberController {
 		  System.out.println(loginMem);
 		
 		  if(loginMem != null && bcryptPasswordEncoder.matches(m.getMemPwd(),loginMem.getMemPwd())) {
-			  session.setAttribute("loginUser",loginMem);
+			  session.setAttribute("loginMem",loginMem);
 			  
 			  System.out.println("로그인 성공!");
 			  mv.setViewName("redirect:/");
@@ -57,7 +56,7 @@ public class MemberController {
 		return "member/joinEnrollForm";
 	}
 	
-	
+	//회원가입
 	@RequestMapping("insert.yj")
 	public String insertMember(Member m, Model model) {
 		
@@ -69,7 +68,7 @@ public class MemberController {
 		  int result = memberService.insertMember(m);
 
 		  if(result > 0 ) {
-			  return "redirect:/";
+			  return "redirect:joinCompleteForm.yj";
 		  } else {
 			  model.addAttribute("errorMsg","회원가입 실패");
 			  
@@ -77,5 +76,48 @@ public class MemberController {
 		  }
 	}
 	
+	//로그아웃
+	@RequestMapping("logout.yj")
+	public String logoutMember(HttpSession session) {
+		
+		session.invalidate(); // invalidate() : session 비우기
+		return "redirect:/";
+	}
 	
+	//회원가입 완료 화면으로 보내기	
+	@RequestMapping("joinCompleteForm.yj")
+	public String joinCompleteForm() {
+		return "member/joinCompleteForm";
+	}
+	
+	//마이페이지 띄우기
+	@RequestMapping("mypage.yj")
+	public String myPage() {
+		return "member/MyPage";
+	}
+	
+	@RequestMapping("update.yj")
+	public String updateMember(Member m, Model model, HttpSession session) {
+		
+		if(memberService.updateMember(m) > 0) {
+			
+			session.setAttribute("loginMem", memberService.loginMember(m));
+			
+			//session에 일회성 알람문 띄우기
+			 session.setAttribute("alertMsg", "성공적으로 변경되었습니다!!");
+			 
+			 return "redirect:myPage.yj";
+			
+		} else { //수정 실패 => 에러문구 담아서 에러페이지로 포워딩
+			
+			model.addAttribute("errorMsg", "회원 정보 변경 실패");
+			System.out.println("수정 실패!");
+			
+			
+			 return "common/errorPage";
+		}
+			
+				
+		
+	}
 }

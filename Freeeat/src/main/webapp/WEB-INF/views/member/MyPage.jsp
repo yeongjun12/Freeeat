@@ -1,16 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <!-- <.%@ page import="java.util.ArrayList,com.freeeat.feed.model.vo.Feed" %>  -->
 
-<%@ page import="java.util.ArrayList,com.freeeat.feed.model.vo.Feed" %>
-<%@ page import="java.util.ArrayList,com.freeeat.review.model.vo.Review" %>
 
-<%
+<!--<.%.@ page import="java.util.ArrayList,com.freeeat.review.model.vo.Review" %> -->
+
+<!--%
       
     ArrayList<Feed> feed = (ArrayList<Feed>)request.getAttribute("feed");
         int feedCount = (int)request.getAttribute("feedCount");
         int reviewCount = (int)request.getAttribute("reviewCount");
         int wishCount = (int)request.getAttribute("wishCount");
-%>  
+%>  -->
 
 <!DOCTYPE html>
 <html>
@@ -142,43 +144,49 @@ table td {
                 <br>
                 <h2 style="font-size:30px;">나의 정보</h2>
                 <br><br>
+                
+                
+               <form action="update.yj" method="post">
                 <table>
                    
         
                     <tr>
                         <td>닉네임 </td>
-                        <td><input type="text"  name="nickName" value="<%=memNickName %>" readonly ></td>
+                        <td><input type="text"  name="memNickName" value="<%=memNickName %>"  ></td>
                         
                     </tr>
             
                     <tr>
                         <td>전화번호 </td>
-                        <td><input type="text"  name="phone" value="<%= phone %>" readonly></td>
+                        <td><input type="text"  name="phone" value="<%= phone %>" ></td>
                     
                     </tr>
         
                     <tr>
                         <td>생년월일  </td>
-                        <td><input type="text"  name="birth" value="<%= birthDate %>" readonly></td>
+                        <td><input type="text"  name="birth" value="<%= birthDate %>" ></td>
                 
                     </tr>
         
                     <tr>
                         <td>이메일 </td>
-                        <td><input type="text"  name="email" value="<%= email %>" readonly></td>
+                        <td><input type="text"  name="email" value="<%= email %>" ></td>
                     
                     </tr>
                     <tr>
                         <td>거주지 </td>
-                        <td><input  type="text"  name="residence" value="<%= residence %>" readonly></td>
+                        <td><input  type="text"  name="residence" value="<%= residence %>" ></td>
                     
                     </tr>
                 </table>
                 
-                <button id="btn" onclick="location.href='<%= contextPath %>/views/member/EditMember.jsp'">수정하기</button>
+                <button id="btn" type="submit">수정하기</button>
                 <br>
                 
             </td>
+            
+            
+            </form>
             <td>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                
@@ -195,11 +203,11 @@ table td {
                             
                                 <tr>
                             
-                                    <td ><%=feedCount %></td>
+                                    <td >feedCount</td>
                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td><%=reviewCount%></td>
+                                    <td>reviewCount</td>
                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td><%=wishCount%></td>
+                                    <td>wishCount</td>
                                    
                                 </tr>
                             
@@ -219,15 +227,15 @@ table td {
                                 <div class="list-area">
 
                                     
-                                    <% for(Feed f : feed) { %>
+                                   <!--   <.% for(Feed f : feed) { %.> -->
                                         
                                     <div class="thumbnail" align="center" border="1">
                                       
-                                        <img src="<%= contextPath %>/<%=f.getFilePath() %>/<%=f.getChangeName() %>">
+                                        <!-- <img src="<.%= contextPath %>/<.%=f.getFilePath() %>/<.%=f.getChangeName() %.>"> -->
                                       
                                     </div>
 
-                                    <% } %>
+                                   <!--  <.% } %> -->
                                  
                                   
         

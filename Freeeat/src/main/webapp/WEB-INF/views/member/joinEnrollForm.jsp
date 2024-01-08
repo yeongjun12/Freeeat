@@ -36,7 +36,7 @@
 		<h2 align="center" style="font-size:40px;" >회원가입</h2>
 		<br>
 
-		<form action="<%= contextPath %>/insert.yj" method="post" id="enroll-form">
+		<form action="insert.yj" method="post" id="enroll-form">
 
 			<!-- 아이디,비밀번호,이름,전화번호,이메일주소,주소,취미 -->
 
@@ -61,8 +61,6 @@
 					<td style="font-size:13px;"> 비밀번호 확인</td>
 					<td><input  type="password" maxlength="15"  size ="40" required></td>
 					
-
-
 				</tr> -->
 				
 				<tr>

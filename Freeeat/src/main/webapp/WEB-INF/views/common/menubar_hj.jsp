@@ -329,11 +329,12 @@
            
             
             <li>
-              <a href="<%= contextPath %>/mypage.yj">마이페이지</a>
+              <a href="mypage.yj">마이페이지</a>
+              
             </li>
 
           <li>
-           <a href='<%= contextPath %>/logout.yj'>로그아웃</a>
+           <a href='logout.yj'>로그아웃</a>
           </li>
 
           <li>
