@@ -302,7 +302,7 @@ table td {
     
     <script>
 		document.addEventListener('DOMContentLoaded', function() {
-		    var residenceValue = "<%=residence %>"; // You can replace this with your dynamic value
+		    var residenceValue = "<%=residence %>";
 		
 		    var residenceSelect = document.getElementById('residence');
 		    
