@@ -1,5 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+
+
+<!--<.%
+ ArrayList<Place> list = (ArrayList<Place>)request.getAttribute("list");
+%.>-->
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,23 +13,33 @@
 <title>Freeeat</title>
 <style>
     .outer>div{
-        border: 1px solid red;
+     /* border: 1px solid red; */
     }
     .outer{
         width: 70%;
-        height: 100%;
+        height: 2500px;
         margin: auto;
     }
-    #mainbanners{
-        height: 20%;
+    .outer #mainbanners{
+        height: 600px;
         z-index: 50;
     }
-    #type{
-        height: 13%;
+    .outer #type{
+        height: 400px;
         display: flex;
     }
-    .best{
-        height: 25%;
+    .outer .best{
+        height: 1300px;
+    }
+    #placeInfo{
+    	height: 200px;
+    }
+    #placeInfo img{
+    	margin: auto;
+    }
+    
+    #bestTitle{
+        font-size: 30px;
     }
     #type .card{
         width: 18rem; 
@@ -57,6 +73,10 @@
 		float: left;
 		margin: auto;
     }
+    #bestTitle{
+    	padding: 10px;
+    }
+    
     #resturantList{
         margin: auto;
     }
@@ -64,14 +84,20 @@
 		width: 30%;
 		float: left;
 		margin: 5px 5px auto;
+		padding: 10px;
 	}
-    #discription #name{
-        font-size: 30px;
-    }
-    #discription #class{
-        font-size: 40px;
-        float: right;
-    }
+   	.location{
+		font-size : 15px;
+	}
+	.placeName{
+		font-size : 18px;
+	}
+	.grade{
+		font-size : 27px;
+		font-weight: 600;
+		padding-right : 5px;
+		float : right;
+	}
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
@@ -91,10 +117,13 @@
                 </div>
                 <div class="carousel-inner">
                 <div class="carousel-item active">
+                    <img src="<%=contextPath%>/resources/image/main.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
                     <img src="https://publy.imgix.net/images/2021/07/07/1625642772_2jQ47Vp9M88V7cJYo99Z2c31LjoP4IuGzBZS1Qg9.jpeg?fm=pjpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://i.ytimg.com/vi/U7Ye9cKgV0k/maxresdefault.jpg" class="d-block w-100" alt="...">
+                    <img src="https://vegilog.com/wp-content/uploads/2019/10/glutenfree.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
                     <img src="https://www.oasis.co.kr:48581/display/mainBanner/main_banner_M_TOP_2DNO.jpg" class="d-block w-100" alt="...">
@@ -117,7 +146,7 @@
                 <div class="card-body" style="height: 30px;">
                   <h3 class="card-title">비건</h3>
                   <p class="card-text">나와 지구를 모두 살리는 방법</p>
-                  <a href="#" class="btn" id="plusBtn">> 맛집 보러가기</a>
+                  <a href="<%=contextPath%>/selectList.hj?cpage=1&keyword=비건" class="btn" id="plusBtn">> 맛집 보러가기</a>
                 </div>
               </div>
               <div class="card">
@@ -125,7 +154,7 @@
                 <div class="card-body">
                   <h3 class="card-title">락토프리</h3>
                   <p class="card-text">속-편안하게</p>
-                  <a href="#" class="btn">> 맛집 보러가기</a>
+                  <a href="<%=contextPath%>/selectList.hj?cpage=1&keyword=락토프리" class="btn">> 맛집 보러가기</a>
                 </div>
               </div>
               <div class="card">
@@ -133,15 +162,15 @@
                 <div class="card-body">
                   <h3 class="card-title">슈가프리</h3>
                   <p class="card-text">맛은 그대로, 설탕은 DOWN</p>
-                  <a href="#" class="btn">> 맛집 보러가기</a>
+                  <a href="<%=contextPath%>/selectList.hj?cpage=1&keyword=슈가프리" class="btn">> 맛집 보러가기</a>
                 </div>
               </div>
               <div class="card">
-                <img src="https://t4.ftcdn.net/jpg/05/07/75/69/360_F_507756976_SAvE72TIKmsnhPS2oMOqjsoJvW8xeJkF.jpg" class="card-img-top" alt="...">
+                <img src="https://src.hidoc.co.kr/image/lib/2021/11/23/1637657511922_0.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h3 class="card-title">디카페인</h3>
-                  <p class="card-text">잠 못드는 밤 걱정없어요.</p>
-                  <a href="#" class="btn">> 맛집 보러가기</a>
+                  <h3 class="card-title">글루텐프리</h3>
+                  <p class="card-text">밀가루를 줄이려는 분들을 위한</p>
+                  <a href="<%=contextPath%>/selectList.hj?cpage=1&keyword=글루텐프리" class="btn">> 맛집 보러가기</a>
                 </div>
               </div>
               <div class="card">
@@ -149,41 +178,81 @@
                 <div class="card-body">
                   <h3 class="card-title">동물복지</h3>
                   <p class="card-text">불필요한 고통없이, 건강하게</p>
-                  <a href="#" class="btn">> 맛집 보러가기</a>
+                  <a href="<%=contextPath%>/selectList.hj?cpage=1&keyword=동물복지" class="btn">> 맛집 보러가기</a>
                 </div>
               </div>
         </div>
         <div class="best">
             <div id="bestTitle">
-                <h2>지금 가장 <b>인기있는</b> 식당 TOP 6</h2>
+                <h2>지금 가장 인기있는 식당 TOP 9 🏅</h2>
             </div>
             <ul id="resturantList">
-                <% for (int i=0; i<6; i++){ %>
-                <li>
-                    <div id="thumbnail">
-                        <img src="https://mp-seoul-image-production-s3.mangoplate.com/895299_1581556713673106.jpg?fit=around|600:*&crop=600:*;*,*&output-format=jpg&output-quality=80" alt=""
-                        width="100%">
-                    </div>
-                    <div id="discription">
-                        <div id="location">서울 강남구</div> 
-                        <div>
-                            <span id="name">칙피스</span>
-                            <span id="class">5.0</span>
-                        </div>
-                        <div>
-                            <span id="reviewCount">리뷰수100</span>
-                            <span id="LokeCount">좋아요수100</span>
-                        </div>
-                    </div>
-                </li>
-                <%}%>
+
             </ul>
        </div>
+       
+       <script>
+     $(function(){
+       $.ajax({
+           url : '<%=contextPath%>/mainPage.hj',
+           success : function(list){
+        	   var result = '';
+        	   for(var i in list){
+                   result +=  '<li>' + 
+                   '<div class="thumbnail">' + 
+	               		'<input type="hidden" name="placeNo" value=' + list[i].placeNo +'>' +
+					
+						'<img src="' + '<%=contextPath%>/' + list[i].titleImg + '" alt="" width="100%" height="300px">' +
+	                    
+	              '</div>' + 
+               '<div class="discription">' + 
+                   '<div class="location" style="font-size:15px;">' + list[i].placeAddress + '</div>' +  
+                       '<span class="placeName"  style="font-size:20px;">' + list[i].placeName + '</span>' + 
+                       '<span class="grade">' + list[i].grade + '</span><br>' + 
+						'<span>' + 
+							'<span class="material-icons">favorite</span>' + 
+							list[i].reviewCount + 
+						'</span>' + 
+						'<span>' + 
+							'<span class="material-icons">edit</span>' + 
+								list[i].wishCount + 
+						'</span><br>' + 
+                   '</div>' + 
+               '</div>' + 
+           '</li>'
+           
+	
+           };
+           
+        	 $('#resturantList').html(result);
+        	   
+           },
+           error : function(){
+        	   
+           }
+           });
+       });
+           
+		$(function(){
+			// 
+			$(document).on('click', '.thumbnail', function(){
+				var placeNo = $(this).children().eq(0).val();
+				//console.log(placeNo);
+				location.href = "<%= contextPath %>/placeDetail.mr?placeNo="+placeNo
+				
+				if(<%=loginMem != null%>){
+					location.href = "<%= contextPath %>/recentInsert.hj?placeNo="+placeNo
+				}
+			})
+			
+		});
+       
+       </script>
 
+		<div id="placeInfo">
+			<a href="<%=contextPath%>/views/member/reportEnrollForm.jsp"><img src="<%=contextPath%>/resources/image/제보버튼.png" height="200px"></a>
+		</div>
     </div> 
-
-
-        
 
     <%@include file = "../common/footer.jsp"%>
 </body>

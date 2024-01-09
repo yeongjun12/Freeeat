@@ -312,8 +312,8 @@
   <header>
     <div class="inner">
       <!-- 로고(홈) -->
-      <a href="<%=contextPath%>/views/common/mainPage.jsp" class="logo"><!--/은 현재 index파일로 이동-->
-        <img src="<%=contextPath%>/resources/image/freeeatlogo.png" alt="Freeeat" style="height: 100%;" >
+      <a href="/freeeat" class="logo"><!--/은 현재 index파일로 이동-->
+        <img src="resources/image/freeeatlogo.png" alt="Freeeat" style="height: 100%;" >
       </a>
 
       <div class="sub-menu">
