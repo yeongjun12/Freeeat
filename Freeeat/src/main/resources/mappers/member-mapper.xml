@@ -98,4 +98,16 @@
 	</update>
 	
 	
+	<!-- 회원 탈퇴 쿼리문 -->
+	<!-- ** 참고 : parameterType에 자바 기본변수 형 작성 시, 지정된 별칭이 있음 -->
+	<update id="deleteMember" parameterType="string">
+		UPDATE
+				MEMBER
+		SET
+				MEM_STATUS = 'N'
+		WHERE
+				MEM_ID = #{ memId }
+	</update>
+	
+	
 </mapper>

@@ -113,11 +113,44 @@ public class MemberController {
 			model.addAttribute("errorMsg", "회원 정보 변경 실패");
 			System.out.println("수정 실패!");
 			
-			
 			 return "common/errorPage";
 		}
+	}
+	
+	@RequestMapping("delete.yj")
+	public String deleteMember(String memId, String memPwd,HttpSession session) {
+		  //memPwd : 회원 탈퇴 요청 시 사용자가 입력한 비밀번호 평문
+		  //session의 loginUser Member객체의 memPwd필드 : DB에 기록된 암호화 된 비밀번호
+		String encPwd = ((Member)session.getAttribute("loginMem")).getMemPwd();
+		
+		if(bcryptPasswordEncoder.matches(memPwd, encPwd)) { 
+			//(평문, 암호문) 둘이 같으면 true반환 
+			//=>평문을 암호문으로 바꾼 다음에 비교 -> true,false
 			
+			int result = memberService.deleteMember(memId);
+			
+			if(result > 0) {
+				 //탈퇴처리 성공 => session에서 loginUser지움, alert문구 담기 => 메인페이지 url요청
+				  session.removeAttribute("loginMem");
+				  session.setAttribute("alertMsg", "잘가고!");
+				  
+				  return "redirect:/";
+			} else {
 				
+				 session.setAttribute("errorMsg", "실패");
+				  return "common/errorPage";
+				
+			}
+			
+		} else {
+			
+			  session.setAttribute("alertMsg", "비밀번호틀렸어~");
+			  return "redirect:mypage.yj";
+			
+		}
+		
+		
+		
 		
 	}
 }

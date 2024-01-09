@@ -19,6 +19,9 @@
 <head>
 <meta charset="UTF-8">
 <title>MyPage</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <style>
 
 
@@ -198,8 +201,17 @@ table td {
                     
                 </table>
                 
+                
+                <div class="btns" align="center">
                 <button id="btn" type="submit">수정하기</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteForm">회원탈퇴</button>
+                
+                </div>
                 <br>
+                
+                
+
+                
                 
             </td>
             
@@ -283,12 +295,50 @@ table td {
         
           
                         </div>
+                        
+      
+                        
                 
                     </td>
                 
                 
                 </tr>
     </table>
+    
+      <!-- 회원탈퇴 버튼 클릭 시 보여질 Modal -->                 
+      <div class="modal fade" id="deleteForm">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">회원탈퇴</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <form action="delete.yj" method="post">
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div align="center">
+                            탈퇴 후 복구가 불가능합니다. <br>
+                            정말로 탈퇴 하시겠습니까? <br>
+                        </div>
+                        <br>
+                            <label for="memPwd" class="mr-sm-2">Password : </label>
+                            <input type="password" class="form-control mb-2 mr-sm-2" placeholder="Enter Password" id="memPwd" name="memPwd"> <br>
+                            <input type="hidden" name="memId" value="${ loginMem.memId }">
+                            
+                            
+                            
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer" align="center">
+                        <button type="submit" class="btn btn-danger">탈퇴하기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
     <br><br><br>
@@ -297,6 +347,9 @@ table td {
         <%@ include file= "../common/footer.jsp" %>
 
     </div>
+    
+    
+       
     
     
     
