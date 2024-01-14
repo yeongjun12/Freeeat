@@ -41,16 +41,17 @@
 			<!-- 아이디,비밀번호,이름,전화번호,이메일주소,주소,취미 -->
 
 			<table class="table_Area" id="table_Area" align="center"  border="1" >
-				<tr>
-					<td> * 아이디</td>
-					<td><input type="text" name="memId"  minlength="5"  placeholder="아이디는 5글자 이상입니다." required></td>
-					<td><button type="button" onclick="idCheck();">중복확인</button></td>
+				<tr >
+					<td style="height: 50px;"> * 아이디</td>
+					<td><input type="text" name="memId" id="memId"  minlength="5"  placeholder="아이디는 5글자 이상입니다." required>
+					<div id="idCheckResult" style="font-size:0.7em;  display:none;"></div>
+					</td>
+					
 				</tr>
 
                 <tr>
-					<td> * 닉네임</td>
+					<td style="height: 50px;"> * 닉네임</td>
 					<td><input type="nickName" name="memNickName"    placeholder="닉네임을 입력하세요" required></td>
-                    <td><button type="button" onclick="nickNameCheck()">중복확인</button></td>
 				</tr>
 
 				<tr>
@@ -116,7 +117,7 @@
 			</table>
 			<br>
 			<div align="center">
-				<button class="btn_1" type="submit"  >회원가입</button>
+				<button class="btn_1" type="submit" disabled >회원가입</button>
 				<button class="btn_2" type="reset">초기화</button>
 			</div>
 			<br><br>
@@ -134,6 +135,8 @@
 
 
 	<script>
+	
+	
 		function check() {
 			if ($("input:checkbox[name='type']").is(":checked")==false) {
 				alert("적어도 하나는 선택하여 주십시오.");
@@ -145,47 +148,48 @@
 		}
 
 
-		function idCheck(){
-
+		$(function(){
 			
-		
-				var $memId = $('#table_Area input[name=memId]');
+			const $idInput = $('#table_Area #memId');
 			
+			$idInput.keyup(function(){
 				
-				$.ajax({
-					url : 'idCheck.yj',
-					data : {checkId : $memId.val()},
-					success : function(result){
-
-						
-						
-						if(result == 'NNNNN') { 
-							alert('이미 존재하거나 탈퇴한 회원의 아이디입니다.');
-							// 재입력	
-							$memId.focus();
-						}
-						else { 
-							
-						
-							if(confirm('사용가능한 아이디입니다. 사용하시겠습니까?')){
-								
-							
-								
-								// 아이디 값은 이후에 변경이 불가능하도록 ==> readonly
-								$memId.attr('readonly', true);
-							}
-							else{
-								$memId.focus();
-							}
-						}
-					},
-					error : function(){
-						console.log("아이디 중복체크용 비동기요청 실패");						
-					}
+				if($idInput.val().length >= 5 ){
 					
-				});
+					$.ajax({
+						url: 'idCheck.yj',
+						data: {checkId : $idInput.val()},
+						success : function(result){
+							
+							if(result =='NNNNN'){ // 사용불가능
+    							$('#idCheckResult').show();
+    							$('#idCheckResult').css('color','red').text('중복된 아이디가 존재합니다.');
+    							$('#enroll-form :submit').attr('disabled',true);
+    							
+    						} else { //사용가능
+    							
+    							$('#idCheckResult').show();
+    							$('#idCheckResult').css('color','green').text('멋진 아이디네요!');
+    							$('#enroll-form :submit').removeAttr('disabled');
+    							
+    						}
+							
+						},
+						
+						error: function(){
+    						console.log('아이디 중복체크용 ajax 통신 실패!');
+    					}
+						
+					})
+				}
+				else{
+    				$('#idCheckResult').hide();
+    				$('#enroll-form :submit').attr('disabled',true);
+    			}
 				
-			};
+			});
+			
+		})
 
 
 	function nickNameCheck(){

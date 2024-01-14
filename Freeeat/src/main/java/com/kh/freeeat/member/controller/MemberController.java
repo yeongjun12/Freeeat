@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.freeeat.member.model.service.MemberService;
@@ -139,18 +140,26 @@ public class MemberController {
 				
 				 session.setAttribute("errorMsg", "실패");
 				  return "common/errorPage";
-				
 			}
 			
 		} else {
 			
 			  session.setAttribute("alertMsg", "비밀번호틀렸어~");
 			  return "redirect:mypage.yj";
-			
 		}
-		
-		
-		
-		
 	}
+	
+	@ResponseBody
+	@RequestMapping("idCheck.yj")
+	public String idCheck(String checkId) {
+		
+		int result = memberService.idCheck(checkId);
+		
+		if(result > 0) { //이미 존재하는 아이디 => 사용불가능(NNNNN)
+			 return "NNNNN";
+		} else { // 사용가능(NNNNY)
+			 return "NNNNY";
+		}
+	}
+	
 }

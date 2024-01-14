@@ -109,5 +109,16 @@
 				MEM_ID = #{ memId }
 	</update>
 	
+	<!-- 아이디 중복 체크용 쿼리문 -->
+	
+	<select id="idCheck" resultType="_int">
+		select
+				count(*)
+		from
+				member
+		where
+				mem_id = #{checkId}
+	</select>
+	
 	
 </mapper>
